@@ -11,6 +11,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
+<<<<<<< HEAD
         $this->app->bind(
             \App\Repositories\Contracts\UsuarioRepositoryInterface::class,
             \App\Repositories\Implementations\UsuarioRepository::class
@@ -20,6 +21,9 @@ class AppServiceProvider extends ServiceProvider
             \App\Services\Contracts\UsuarioServiceInterface::class,
             \App\Services\Implementations\UsuarioService::class
         );
+=======
+        //
+>>>>>>> adaef6a94d41c10e2d158db932439fc6c168ff34
     }
 
     /**
