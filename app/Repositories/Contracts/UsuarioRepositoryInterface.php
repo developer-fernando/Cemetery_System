@@ -4,9 +4,9 @@ namespace App\Repositories\Contracts;
 
 interface UsuarioRepositoryInterface
 {
-    public function all();
-    public function find(int $id);
-    public function create(array $data);
-    public function update(int $id, array $data);
-    public function delete(int $id);
+    public function listar();
+    public function visualizar(int $id);
+    public function criar(array $data);
+    public function atualizar(int $id, array $data);
+    public function deletar(int $id);
 }

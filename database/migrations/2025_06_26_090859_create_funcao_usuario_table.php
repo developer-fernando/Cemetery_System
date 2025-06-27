@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('funcao_usuario', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('usuario_id')->constrained('usuarios')->onDelete('cascade');
+            $table->foreignId('funcao_id')->constrained('funcoes')->onDelete('cascade');
+            $table->unique(['usuario_id', 'funcao_id']); // Garante que a combinação seja única
             $table->timestamps();
         });
     }

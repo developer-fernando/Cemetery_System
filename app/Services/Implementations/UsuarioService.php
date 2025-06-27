@@ -3,6 +3,7 @@
 namespace App\Services\Implementations;
 
 use App\Repositories\Contracts\UsuarioRepositoryInterface;
+use App\Models\Funcao;
 use App\Services\Contracts\UsuarioServiceInterface;
 
 class UsuarioService implements UsuarioServiceInterface
@@ -16,26 +17,31 @@ class UsuarioService implements UsuarioServiceInterface
 
     public function listar()
     {
-        return $this->usuarioRepository->all();
+        return $this->usuarioRepository->listar();
     }
 
     public function visualizar(int $id)
     {
-        return $this->usuarioRepository->find($id);
+        return $this->usuarioRepository->visualizar($id);
     }
 
     public function criar(array $data)
     {
-        return $this->usuarioRepository->create($data);
+        return $this->usuarioRepository->criar($data);
     }
 
     public function atualizar(int $id, array $data)
     {
-        return $this->usuarioRepository->update($id, $data);
+        return $this->usuarioRepository->atualizar($id, $data);
     }
 
     public function deletar(int $id)
     {
-        return $this->usuarioRepository->delete($id);
+        return $this->usuarioRepository->deletar($id);
+    }
+
+    public function listarFuncoes()
+    {
+        return Funcao::all();
     }
 }

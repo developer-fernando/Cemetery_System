@@ -7,32 +7,40 @@ use App\Repositories\Contracts\UsuarioRepositoryInterface;
 
 class UsuarioRepository implements UsuarioRepositoryInterface
 {
-    public function all()
+    public function listar()
     {
-        return Usuario::all();
+        return Usuario::with('funcoes')->get();
     }
 
-    public function find(int $id)
+    public function visualizar(int $id)
     {
-        return Usuario::findOrFail($id);
+        return Usuario::with('funcoes')->findOrFail($id);
     }
 
-    public function create(array $data)
+    public function criar(array $data)
     {
-        return Usuario::create($data);
-    }
-
-    public function update(int $id, array $data)
-    {
-        $usuario = Usuario::findOrFail($id);
-        if (isset($data['senha'])) {
-            $data['senha'] = bcrypt($data['senha']);
-        }
-        $usuario->update($data);
+        $data['senha'] = bcrypt($data['senha']);
+        $usuario = Usuario::create($data);
+        $usuario->funcoes()->sync($data['funcoes']);
         return $usuario;
     }
 
-    public function delete(int $id)
+    public function atualizar(int $id, array $data)
+    {
+        $usuario = Usuario::findOrFail($id);
+
+        if (!empty($data['senha'])) {
+            $data['senha'] = bcrypt($data['senha']);
+        } else {
+            unset($data['senha']);
+        }
+
+        $usuario->update($data);
+        $usuario->funcoes()->sync($data['funcoes']);
+        return $usuario;
+    }
+
+    public function deletar(int $id)
     {
         $usuario = Usuario::findOrFail($id);
         return $usuario->delete();

@@ -1,6 +1,5 @@
 body {
-    background: url('../img/bg.jpg') no-repeat center center fixed;
-    background-size: cover;
+    background-color: #f8f9fa;
 }
 
 .login-container {
@@ -9,10 +8,6 @@ body {
 
 .card {
     border-radius: 10px;
-}
-
-.navbar-brand {
-    font-weight: bold;
 }
 
 .navbar {

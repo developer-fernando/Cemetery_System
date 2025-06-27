@@ -6,19 +6,21 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class StoreUsuarioRequest extends FormRequest
 {
-    public function authorize()
+    public function authorize(): bool
     {
         return true;
     }
 
-    public function rules()
+    public function rules(): array
     {
         return [
             'nome' => 'required|string|max:255',
             'email' => 'required|email|unique:usuarios,email',
-            'senha' => 'required|min:6',
-            'celular' => 'required|string|max:20',
             'telefone' => 'nullable|string|max:20',
+            'celular' => 'required|string|max:20',
+            'senha' => 'required|confirmed|min:6',
+            'funcoes' => 'required|array',
+            'funcoes.*' => 'exists:funcoes,id',
         ];
     }
 }

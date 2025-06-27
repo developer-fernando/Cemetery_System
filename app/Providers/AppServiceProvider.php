@@ -3,6 +3,10 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use App\Repositories\Contracts\UsuarioRepositoryInterface;
+use App\Repositories\Implementations\UsuarioRepository;
+use App\Services\Contracts\UsuarioServiceInterface;
+use App\Services\Implementations\UsuarioService;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -11,7 +15,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-<<<<<<< HEAD
         $this->app->bind(
             \App\Repositories\Contracts\UsuarioRepositoryInterface::class,
             \App\Repositories\Implementations\UsuarioRepository::class
@@ -21,9 +24,6 @@ class AppServiceProvider extends ServiceProvider
             \App\Services\Contracts\UsuarioServiceInterface::class,
             \App\Services\Implementations\UsuarioService::class
         );
-=======
-        //
->>>>>>> adaef6a94d41c10e2d158db932439fc6c168ff34
     }
 
     /**

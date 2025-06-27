@@ -17,26 +17,38 @@ class UsuarioController extends Controller
 
     public function index()
     {
-        return response()->json($this->usuarioService->listar());
+        $usuarios = $this->usuarioService->listar();
+        return view('usuarios.index', compact('usuarios'));
     }
 
-    public function show($id)
+    public function create()
     {
-        return response()->json($this->usuarioService->visualizar($id));
+        $funcoes = $this->usuarioService->listarFuncoes();
+        return view('usuarios.create', compact('funcoes'));
     }
 
     public function store(StoreUsuarioRequest $request)
     {
-        return response()->json($this->usuarioService->criar($request->validated()));
+        $this->usuarioService->criar($request->validated());
+        return redirect()->route('usuarios.index')->with('success', 'Usuário cadastrado com sucesso!');
+    }
+
+    public function edit($id)
+    {
+        $usuario = $this->usuarioService->visualizar($id);
+        $funcoes = $this->usuarioService->listarFuncoes();
+        return view('usuarios.edit', compact('usuario', 'funcoes'));
     }
 
     public function update(UpdateUsuarioRequest $request, $id)
     {
-        return response()->json($this->usuarioService->atualizar($id, $request->validated()));
+        $this->usuarioService->atualizar($id, $request->validated());
+        return redirect()->route('usuarios.index')->with('success', 'Usuário atualizado com sucesso!');
     }
 
     public function destroy($id)
     {
-        return response()->json(['deleted' => $this->usuarioService->deletar($id)]);
+        $this->usuarioService->deletar($id);
+        return redirect()->route('usuarios.index')->with('success', 'Usuário excluído com sucesso!');
     }
 }
